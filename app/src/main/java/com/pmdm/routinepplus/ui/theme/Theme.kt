@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
+private val LightColorScheme = lightColorScheme(
     primary = MainColorBlue,
     secondary = SecondaryColorGold,
     tertiary = BackColor
@@ -30,7 +30,7 @@ fun RoutinePPLUSTheme(
     content: @Composable () -> Unit
 ) {
 
-    val colorScheme = DarkColorScheme
+    val colorScheme = LightColorScheme
 
     val view = LocalView.current
     if (!view.isInEditMode) {

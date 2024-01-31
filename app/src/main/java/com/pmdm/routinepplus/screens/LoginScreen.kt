@@ -89,6 +89,13 @@ fun SingInScreen(navController: NavHostController) {
                     .weight(1.5f)
                     .padding(3.dp),
                 shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(
+                        android.graphics.Color.parseColor(
+                            "#FF09B3E4"
+                        )
+                    )
+                ),
             ) {
                 Column(
                     Modifier
@@ -96,6 +103,7 @@ fun SingInScreen(navController: NavHostController) {
                         .padding(30.dp)
                 ) {
                     Text(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
                         text = "INICIO DE SESIÓN",
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 25.sp,
@@ -147,21 +155,26 @@ fun SingInScreen(navController: NavHostController) {
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(
+
                             onClick = {
                                 if (username.length > 20) {
-                                    errorMessage = "El nombre de usuario no puede tener más de 20 caracteres"
+                                    errorMessage =
+                                        "El nombre de usuario no puede tener más de 20 caracteres"
                                 } else if (password.length > 20) {
-                                    errorMessage = "La contraseña no puede tener más de 20 caracteres"
+                                    errorMessage =
+                                        "La contraseña no puede tener más de 20 caracteres"
                                 } else if (username.length < 4) {
-                                    errorMessage = "Tu nombre de usuario debe ser de al menos 4 caracteres"
+                                    errorMessage =
+                                        "Tu nombre de usuario debe ser de al menos 4 caracteres"
                                 } else if (password.length < 8) {
-                                    errorMessage = "La contraseña no puede tener menos de 8 caracteres"
+                                    errorMessage =
+                                        "La contraseña no puede tener menos de 8 caracteres"
                                 } else {
                                     errorMessage = null
-                                    if(isValidCredentialsStudent(username, password)) {
+                                    if (isValidCredentialsStudent(username, password)) {
                                         errorMessage = null
                                         // onLoginClicked(username, password)
-                                        navController.navigate(NavigationActivity.Dashboard.route)
+                                        navController.navigate("Dashboard")
                                     } else {
                                         errorMessage = "Credenciales de usuario no válidas"
                                     }
@@ -170,15 +183,38 @@ fun SingInScreen(navController: NavHostController) {
                             },
                             enabled = isFormValid,
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(16.dp)
+                            shape = RoundedCornerShape(16.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                contentColor = Color(
+                                    android.graphics.Color.parseColor(
+                                        "#09B3E4"
+                                    )
+                                ),
+                                containerColor = Color(
+                                    android.graphics.Color.parseColor(
+                                        "#FFD699"
+                                    )
+                                ),
+                                disabledContainerColor = Color(
+                                    android.graphics.Color.parseColor(
+                                        "#FFEBCD"
+                                    )
+                                ),
+                                disabledContentColor = Color(
+                                    android.graphics.Color.parseColor(
+                                        "#0CC0DF"
+                                    )
+                                )
+                            )
                         ) {
-                            Text(text = "Acceder")
+                            Text(
+                                text = "Acceder"
+                            )
                         }
                     }
                     errorMessage?.let {
                         Text(
                             text = it,
-                            color = Color.Red,
                             modifier = Modifier
                                 .padding(top = 8.dp)
                                 .fillMaxWidth()

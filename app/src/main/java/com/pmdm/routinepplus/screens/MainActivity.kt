@@ -28,11 +28,11 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navigationController,
-                    startDestination = NavigationActivity.LoginScreenMain.route
+                    startDestination = "dashboard"
                 ) {
-                    composable(NavigationActivity.LoginScreenMain.route) {
-                        SingInScreen(navController = navigationController)
-                    }
+                    composable("loginScreen"){ SingInScreen(navController = navigationController)}
+                    composable("dashBoard"){ Dashboard(navigationController) }
+                    composable("exercisesScreen"){ Exercises(navigationController) }
                 }
             }
         }
