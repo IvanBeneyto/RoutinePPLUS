@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -30,7 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -85,10 +88,15 @@ fun SingInScreen(navController: NavHostController) {
 
             Card(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .weight(1.5f)
-                    .padding(3.dp),
-                shape = RoundedCornerShape(24.dp),
+                    .fillMaxWidth()
+                    .weight(1.2f)
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 30.dp,
+                            topEnd = 30.dp
+                        )
+                    ),
+
                 colors = CardDefaults.cardColors(
                     containerColor = Color(
                         android.graphics.Color.parseColor(
@@ -96,6 +104,7 @@ fun SingInScreen(navController: NavHostController) {
                         )
                     )
                 ),
+                shape = RectangleShape
             ) {
                 Column(
                     Modifier
@@ -116,8 +125,17 @@ fun SingInScreen(navController: NavHostController) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
+                        TextField(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(
+                                    RoundedCornerShape(
+                                        topStart = 15.dp,
+                                        topEnd = 15.dp,
+                                        bottomEnd = 15.dp,
+                                        bottomStart = 15.dp
+                                    )
+                                ),
                             value = username,
                             onValueChange = { username = it },
                             label = { Text(text = "Username") },
@@ -133,8 +151,17 @@ fun SingInScreen(navController: NavHostController) {
                             }
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
+                        TextField(
+
+                            modifier = Modifier.fillMaxWidth().clip(
+                                RoundedCornerShape(
+                                    topStart = 15.dp,
+                                    topEnd = 15.dp,
+                                    bottomEnd = 15.dp,
+                                    bottomStart = 15.dp
+
+                                )
+                            ),
                             value = password,
                             onValueChange = { password = it },
                             label = { Text(text = "Password") },
