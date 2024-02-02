@@ -64,11 +64,15 @@ fun SingInScreen(navController: NavHostController) {
         mutableStateOf(false)
     }
 
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-
     val isFormValid by derivedStateOf {
         username.isNotBlank() && password.length >= 7
     }
+
+    var isLoginCorrect: Boolean by remember {
+        mutableStateOf(false)
+    }
+
+
 
     Scaffold() {
         Column(
@@ -152,16 +156,17 @@ fun SingInScreen(navController: NavHostController) {
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         TextField(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(
+                                    RoundedCornerShape(
+                                        topStart = 15.dp,
+                                        topEnd = 15.dp,
+                                        bottomEnd = 15.dp,
+                                        bottomStart = 15.dp
 
-                            modifier = Modifier.fillMaxWidth().clip(
-                                RoundedCornerShape(
-                                    topStart = 15.dp,
-                                    topEnd = 15.dp,
-                                    bottomEnd = 15.dp,
-                                    bottomStart = 15.dp
-
-                                )
-                            ),
+                                    )
+                                ),
                             value = password,
                             onValueChange = { password = it },
                             label = { Text(text = "Password") },
@@ -181,31 +186,21 @@ fun SingInScreen(navController: NavHostController) {
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Usuario y contraseña no correcto",
+                            color = if (isLoginCorrect)
+                                Color.Red
+                            else
+                                Color.Transparent
+
+                        )
                         Button(
-
                             onClick = {
-                                if (username.length > 20) {
-                                    errorMessage =
-                                        "El nombre de usuario no puede tener más de 20 caracteres"
-                                } else if (password.length > 20) {
-                                    errorMessage =
-                                        "La contraseña no puede tener más de 20 caracteres"
-                                } else if (username.length < 4) {
-                                    errorMessage =
-                                        "Tu nombre de usuario debe ser de al menos 4 caracteres"
-                                } else if (password.length < 8) {
-                                    errorMessage =
-                                        "La contraseña no puede tener menos de 8 caracteres"
+                                if (isValidCredentialsStudent(username, password)) {
+                                    // onLoginClicked(username, password)
+                                    navController.navigate("Dashboard")
                                 } else {
-                                    errorMessage = null
-                                    if (isValidCredentialsStudent(username, password)) {
-                                        errorMessage = null
-                                        // onLoginClicked(username, password)
-                                        navController.navigate("Dashboard")
-                                    } else {
-                                        errorMessage = "Credenciales de usuario no válidas"
-                                    }
-
+                                    isLoginCorrect = true
                                 }
                             },
                             enabled = isFormValid,
@@ -237,16 +232,8 @@ fun SingInScreen(navController: NavHostController) {
                             Text(
                                 text = "Acceder"
                             )
+
                         }
-                    }
-                    errorMessage?.let {
-                        Text(
-                            text = it,
-                            modifier = Modifier
-                                .padding(top = 8.dp)
-                                .fillMaxWidth()
-                                .alpha(0.8f)
-                        )
                     }
                 }
             }

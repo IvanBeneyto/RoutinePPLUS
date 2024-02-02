@@ -74,9 +74,11 @@ fun Dashboard(navController: NavController) {
 
 @Composable
 fun MyMenu(innerPadding: PaddingValues) {
-    Column (modifier = Modifier.fillMaxWidth()){
+    Column(modifier = Modifier.fillMaxWidth()) {
         Icon(
-            modifier = Modifier.align(Alignment.CenterHorizontally).size(100.dp),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .size(100.dp),
             imageVector = Icons.Default.Person,
             tint = Color.Black,
             contentDescription = ""
@@ -96,7 +98,12 @@ fun MyBottomNavigation(navController: NavController) {
     ) {
         NavigationBarItem(
             selected = index == 0,
-            onClick = { navController.navigate("exercisesScreen") },
+            onClick =
+
+            {
+                index = 0
+                navController.navigate("exercisesScreen")
+            },
             icon = {
                 Icon(
                     modifier = Modifier.size(35.dp),
