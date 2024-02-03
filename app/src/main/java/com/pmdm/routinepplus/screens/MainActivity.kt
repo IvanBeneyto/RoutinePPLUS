@@ -28,11 +28,13 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navigationController,
-                    startDestination = "loginScreen"
+                    startDestination = "routineday"
                 ) {
                     composable("loginScreen"){ SingInScreen(navController = navigationController)}
                     composable("dashBoard"){ Dashboard(navigationController) }
                     composable("exercisesScreen"){ Exercises(navigationController) }
+                    composable("routineday"){ RoutineDay(navigationController) }
+                    composable("routinemonth"){ RoutineMonth(navigationController) }
                 }
             }
         }

@@ -115,7 +115,9 @@ fun MyBottomNavigation(navController: NavController) {
         )
         NavigationBarItem(
             selected = index == 1,
-            onClick = { index = 1 },
+            onClick = { index = 1
+
+                navController.navigate("dashboard")},
             icon = {
                 Icon(
                     modifier = Modifier.size(35.dp),
@@ -127,7 +129,10 @@ fun MyBottomNavigation(navController: NavController) {
         )
         NavigationBarItem(
             selected = index == 2,
-            onClick = { index = 2 },
+            onClick = {
+                index = 2
+                navController.navigate("routinemonth")
+            },
             icon = {
                 Icon(
                     modifier = Modifier.size(35.dp),
