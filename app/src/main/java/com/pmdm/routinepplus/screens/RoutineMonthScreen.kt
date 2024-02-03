@@ -1,8 +1,9 @@
 package com.pmdm.routinepplus.screens
 
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,13 +20,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 
 @Composable
 fun myMenuRoutine(navController: NavController) {
-    var month by remember { mutableStateOf("ENERO") }
+    // Importamos el contexto de la aplicación
+    val context = LocalContext.current
+
+    // Obtenemos las preferencias compartidas
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    // Recuperamos el mes guardado
+    val savedMonth = sharedPreferences.getString("saved_month", "ENERO") ?: "ENERO"
+    var month by remember { mutableStateOf(savedMonth) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -39,7 +49,10 @@ fun myMenuRoutine(navController: NavController) {
 
         OutlinedTextField(
             value = month,
-            onValueChange = { month = it },
+            onValueChange = {
+                month = it
+                saveMonth(it, sharedPreferences) // Pasamos las preferencias como parámetro
+            },
             label = { Text("Mes") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -74,5 +87,9 @@ fun RoutineMonth(navController: NavController) {
     )
 }
 
-
-
+private fun saveMonth(month: String, sharedPreferences: SharedPreferences) {
+    with(sharedPreferences.edit()) {
+        putString("saved_month", month)
+        apply()
+    }
+}
