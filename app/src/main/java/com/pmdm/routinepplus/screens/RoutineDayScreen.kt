@@ -1,5 +1,6 @@
 package com.pmdm.routinepplus.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun RoutineDay(navController: NavController) {
@@ -47,18 +49,26 @@ fun RutinaDias(innerPadding: PaddingValues) {
 
 @Composable
 fun DiaRutina(dia: Int) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp)
-        .padding(bottom = 56.dp)){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .padding(bottom = 56.dp)
+    ) {
         Text(text = "DÍA $dia", modifier = Modifier.padding(bottom = 8.dp))
 
         Column(modifier = Modifier.fillMaxWidth()) {
             Row {
-                Text(text = "EJERCICIO", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+                Text(
+                    text = "EJERCICIO",
+                    modifier = Modifier.weight(1f),
+                    textAlign = TextAlign.Center
+                )
                 Text(text = "SERIES", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
                 Text(text = "PESO", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
             }
+            val myColor = Color(0xFFFFEBCD)
+            val myColor2 = Color(0xFFFFF4E3)
 
             repeat(5) {
                 Row {
@@ -66,7 +76,9 @@ fun DiaRutina(dia: Int) {
                     OutlinedTextField(
                         value = ejercicio,
                         onValueChange = { ejercicio = it },
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .background(myColor)
                     )
 
                     var series by remember { mutableStateOf("") }
@@ -74,7 +86,9 @@ fun DiaRutina(dia: Int) {
                         value = series,
                         onValueChange = { series = it },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .background(myColor2)
                     )
 
                     var peso by remember { mutableStateOf("") }
@@ -82,7 +96,9 @@ fun DiaRutina(dia: Int) {
                         value = peso,
                         onValueChange = { peso = it },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .background(myColor2)
                     )
                 }
             }

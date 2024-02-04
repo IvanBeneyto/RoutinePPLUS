@@ -2,6 +2,7 @@ package com.pmdm.routinepplus.screens
 
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,9 +23,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavController // Para Compose 1.2.0 y superior
+
 
 
 @Composable
@@ -59,6 +64,8 @@ fun myMenuRoutine(navController: NavController) {
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         )
 
+
+
         LazyColumn(
             modifier = Modifier.padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -68,7 +75,8 @@ fun myMenuRoutine(navController: NavController) {
                     onClick = { navController.navigate("routineday") },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(70.dp) // Increase the height of the button
+                        .background(Color(0xFFFFD699))
+                        .height(70.dp),
                 ) {
                     Text(text = "SEMANA ${index + 1}")
                 }

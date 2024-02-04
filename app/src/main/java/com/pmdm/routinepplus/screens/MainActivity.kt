@@ -9,9 +9,41 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.pmdm.routinepplus.R
 import com.pmdm.routinepplus.ui.theme.RoutinePPLUSTheme
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        val items = listOf(
+            Item(
+                tittle = "PECHO",
+                image = R.drawable.pecho
+            ),
+            Item(
+                tittle = "ESPALDA",
+                image = R.drawable.espalda
+            ),
+            Item(
+                tittle = "PIERNAS",
+                image = R.drawable.pierna
+            ),
+            Item(
+                tittle = "BRAZOS",
+                image = R.drawable.brazo
+            ),
+            Item(
+                tittle = "ABDOMEN",
+                image = R.drawable.abdomen
+            ),
+            Item(
+                tittle = "GLUTEOS",
+                image = R.drawable.gluteos
+            ),
+        )
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +56,16 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navigationController,
-                    startDestination = "LoginScreen"
+                    startDestination = "exercisesScreen"
                 ) {
-                    composable("loginScreen"){ SingInScreen(navController = navigationController)}
-                    composable("dashBoard"){ Dashboard(navigationController) }
-                    composable("exercisesScreen"){ Exercises(navigationController) }
-                    composable("routineday"){ RoutineDay(navigationController) }
-                    composable("routinemonth"){ RoutineMonth(navigationController) }
+                    composable("loginScreen") { SingInScreen(navController = navigationController) }
+                    composable("dashBoard") { Dashboard(navigationController) }
+                    composable("exercisesScreen") { Exercises(navigationController) }
+                    composable("routineday") { RoutineDay(navigationController) }
+                    composable("routinemonth") { RoutineMonth(navigationController) }
                 }
             }
         }
     }
 }
+;

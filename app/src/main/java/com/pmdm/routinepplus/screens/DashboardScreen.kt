@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
@@ -40,74 +41,14 @@ fun Dashboard(navController: NavController) {
 
 @Composable
 fun MyMenu(innerPadding: PaddingValues) {
-    val nombre = "Iván Beneyto"
-    var edad = 25
-    var altura = 186
-    var peso = 90
-    var diasCompletados = 0
+    Column (modifier = Modifier.fillMaxWidth()){
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        // Cabecera
-        Text(text = "MI SEGUIMIENTO", modifier = Modifier.padding(16.dp))
-
-        // Datos personales
-        Row(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Nombre:", modifier = Modifier.width(100.dp))
-            Text(text = nombre, modifier = Modifier.fillMaxWidth())
-        }
-
-        Row(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Edad:", modifier = Modifier.width(100.dp))
-            OutlinedTextField(
-                value = edad.toString(),
-                onValueChange = { edad = it.toIntOrNull() ?: edad },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        Row(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Altura:", modifier = Modifier.width(100.dp))
-            OutlinedTextField(
-                value = altura.toString(),
-                onValueChange = { altura = it.toIntOrNull() ?: altura },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        Row(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Peso:", modifier = Modifier.width(100.dp))
-            OutlinedTextField(
-                value = peso.toString(),
-                onValueChange = { peso = it.toIntOrNull() ?: peso },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        // Barra de progreso
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(text = "DÍAS COMPLETADOS:", modifier = Modifier.width(100.dp))
-            LinearProgressIndicator(
-                progress = diasCompletados.toFloat() / 5,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        // Botón para aumentar días completados
-        Button(
-            onClick = { diasCompletados += 1 },
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(16.dp)
-        ) {
-            Text(text = "AÑADIR DÍA COMPLETADO")
-        }
+        Icon(
+            modifier = Modifier.align(Alignment.CenterHorizontally).size(100.dp),
+            imageVector = Icons.Default.Person,
+            tint = Color(0xFFFFD699),
+            contentDescription = ""
+        )
     }
 }
 
