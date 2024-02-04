@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -38,11 +39,13 @@ fun Exercises(navController: NavController) {
 
 @Composable
 fun MyMenuExercises(innerPadding: PaddingValues) {
+
     LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(vertical = 16.dp),
         columns = GridCells.Fixed(2)
     ) {
+
         itemsIndexed(MainActivity.items) { index, item ->
             GridItem(item = item)
             Spacer(modifier = Modifier.height(8.dp))
@@ -52,12 +55,14 @@ fun MyMenuExercises(innerPadding: PaddingValues) {
 
 @Composable
 fun GridItem(item: Item) {
+
     Column(
         modifier = Modifier
             .height(250.dp)
             .width(200.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
 
         Image(
             modifier = Modifier

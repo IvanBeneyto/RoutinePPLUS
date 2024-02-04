@@ -68,7 +68,7 @@ fun MyBottomNavigation(navController: NavController) {
 
             {
                 index = 0
-                navController.navigate("exercisesScreen")
+                navController.navigate("exercises_screen")
             },
             icon = {
                 Icon(
@@ -99,7 +99,7 @@ fun MyBottomNavigation(navController: NavController) {
             selected = index == 2,
             onClick = {
                 index = 2
-                navController.navigate("routinemonth")
+                navController.navigate("routine_month")
             },
             icon = {
                 Icon(

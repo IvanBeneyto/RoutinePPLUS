@@ -72,7 +72,7 @@ fun myMenuRoutine(navController: NavController) {
         ) {
             items(4) { index ->
                 Button(
-                    onClick = { navController.navigate("routineday") },
+                    onClick = { navController.navigate("routine_day") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(Color(0xFFFFD699))
