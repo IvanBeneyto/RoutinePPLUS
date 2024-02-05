@@ -14,35 +14,6 @@ import com.pmdm.routinepplus.ui.theme.RoutinePPLUSTheme
 
 class MainActivity : ComponentActivity() {
 
-//    companion object {
-//        val items = listOf(
-//            Item(
-//                tittle = "PECHO",
-//                image = R.drawable.pecho
-//            ),
-//            Item(
-//                tittle = "ESPALDA",
-//                image = R.drawable.espalda
-//            ),
-//            Item(
-//                tittle = "PIERNAS",
-//                image = R.drawable.pierna
-//            ),
-//            Item(
-//                tittle = "BRAZOS",
-//                image = R.drawable.brazo
-//            ),
-//            Item(
-//                tittle = "ABDOMEN",
-//                image = R.drawable.abdomen
-//            ),
-//            Item(
-//                tittle = "GLUTEOS",
-//                image = R.drawable.gluteos
-//            ),
-//        )
-//    }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +27,7 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navigationController,
-                    startDestination = "dashboard"
+                    startDestination = "login_screen"
                 ) {
                     composable("login_screen") { SingInScreen(navController = navigationController) }
                     composable("dashboard") { Dashboard(navigationController) }
