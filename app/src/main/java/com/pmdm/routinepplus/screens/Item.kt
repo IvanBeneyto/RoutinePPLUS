@@ -5,5 +5,6 @@ import androidx.annotation.DrawableRes
 
 data class Exercices(
     var nameExercise: String,
+    var description: String,
     @DrawableRes var picture: Int
 )

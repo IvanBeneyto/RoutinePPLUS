@@ -5,6 +5,7 @@ import android.preference.PreferenceManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,7 +32,7 @@ import androidx.navigation.NavController // Para Compose 1.2.0 y superior
 
 
 @Composable
-fun myMenuRoutine(navController: NavController) {
+fun myMenuRoutine(innerPadding: PaddingValues, navController: NavController) {
     // Importamos el contexto de la aplicación
     val context = LocalContext.current
 
@@ -88,7 +89,7 @@ fun myMenuRoutine(navController: NavController) {
 fun RoutineMonth(navController: NavController) {
     Scaffold(
         content = { innerPadding ->
-            myMenuRoutine(navController)
+            myMenuRoutine(innerPadding, navController)
         },
         bottomBar = { MyBottomNavigation(navController) }
     )

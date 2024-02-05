@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navigationController,
-                    startDestination = "exercises_screen"
+                    startDestination = "dashboard"
                 ) {
                     composable("login_screen") { SingInScreen(navController = navigationController) }
                     composable("dashboard") { Dashboard(navigationController) }
