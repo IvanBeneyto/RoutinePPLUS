@@ -1,5 +1,6 @@
 package com.pmdm.routinepplus.screens
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -68,9 +69,18 @@ fun Dashboard(navController: NavController) {
 
 @Composable
 fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
-    var edad by rememberSaveable { mutableStateOf("") }
-    var altura by rememberSaveable { mutableStateOf("") }
-    var peso by rememberSaveable { mutableStateOf("") }
+
+    val sharedPref = LocalContext.current.getSharedPreferences("progress_data", Context.MODE_PRIVATE)
+
+    var progressCount: Int by remember { mutableStateOf(sharedPref.getInt("progress_count", 0)) } // Cargar progreso
+    var progress by remember { mutableStateOf(progressCount * 0.1f) } // Calcular porcentaje
+
+
+    fun saveProgress() {
+        val editor = sharedPref.edit()
+        editor.putInt("progress_count", progressCount)
+        editor.apply()
+    }
 
     Column(
         modifier = Modifier
@@ -156,7 +166,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Peso:  90 Kg",
+                text = "PESO:  90 Kg",
                 color = Color.Black,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
@@ -167,8 +177,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
 
         }
         val context = LocalContext.current
-        var progressCount: Int by remember { mutableStateOf(0) }
-        var progress by remember { mutableStateOf(0f) }
+
 
 
         when (progressCount) {
@@ -212,7 +221,6 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                     .fillMaxWidth(size),
                 horizontalArrangement = Arrangement.End
             ) {
-                Text(text = "$progress")
             }
             // Progress Bar
             Box(
@@ -249,6 +257,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                     onClick = {
                         if (progressCount > 0) {
                             progressCount -= 2
+                            saveProgress()
                         } else {
                             Toast.makeText(context, "No puedes quitar más dias", Toast.LENGTH_SHORT)
                                 .show()
@@ -266,6 +275,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                     onClick = {
                         if (progressCount < 10) {
                             progressCount += 2
+                            saveProgress()
                         } else {
                             Toast.makeText(
                                 context,
