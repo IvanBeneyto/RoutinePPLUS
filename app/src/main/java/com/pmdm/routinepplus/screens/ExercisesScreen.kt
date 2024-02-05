@@ -64,54 +64,42 @@ fun SuperHeroGridView(innerPadding: PaddingValues) {
         content = {
             items(getSuperHeroes()) {
                 ItemHero(it) {
-                    Toast.makeText(context, it.superHeroName, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.nameExercise, Toast.LENGTH_SHORT).show()
                 }
             }
         })
 }
 
 @Composable
-fun ItemHero(superhero: Superhero, onItemSelected: (Superhero) -> Unit) {
+fun ItemHero(exercises: Exercices, onItemSelected: (Exercices) -> Unit) {
     Card(border = BorderStroke(2.dp, Color.Red),
         shape = RoundedCornerShape(4.dp),
         modifier = Modifier
             .fillMaxWidth()
             .width(250.dp)
-            .clickable { onItemSelected(superhero) }) {
+            .clickable { onItemSelected(exercises) }) {
         Column() {
             Image(
-                painter = painterResource(id = superhero.picture),
+                painter = painterResource(id = exercises.picture),
                 contentDescription = "SuperHero Avatar",
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = superhero.superHeroName,
+                text = exercises.nameExercise,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-            Text(
-                text = superhero.realName,
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                fontSize = 12.sp
-            )
-            Text(
-                text = superhero.publisher,
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(6.dp),
-                fontSize = 10.sp
             )
         }
     }
 }
 
-fun getSuperHeroes(): List<Superhero> {
+fun getSuperHeroes(): List<Exercices> {
     return listOf(
-        Superhero("Spiderman", "Peter Parker", "Marvel", R.drawable.pecho),
-        Superhero("Wolverine", "James Howlett", "Marvel", R.drawable.espalda),
-        Superhero("Batman", "Bruce Wayne", "DC", R.drawable.pierna),
-        Superhero("Thor", "Thor Odinson", "Marvel", R.drawable.brazo),
-        Superhero("Flash", "Jay Garrick", "DC", R.drawable.abdomen),
-        Superhero("Green Lantern", "Alan Scott", "DC", R.drawable.gluteos)
+        Exercices("PECHO", R.drawable.pecho),
+        Exercices("ESPALDA", R.drawable.espalda),
+        Exercices("PIERNA", R.drawable.pierna),
+        Exercices("BRAZO", R.drawable.brazo),
+        Exercices("ABDOMEN", R.drawable.abdomen),
+        Exercices("GLUTEOS", R.drawable.gluteos)
     )
 }

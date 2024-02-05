@@ -61,8 +61,8 @@ class MainActivity : ComponentActivity() {
                     composable("login_screen") { SingInScreen(navController = navigationController) }
                     composable("dashboard") { Dashboard(navigationController) }
                     composable("exercises_screen") { ExerciseScreen(navigationController) }
-                    composable("routine_day") { RoutineDay(navigationController) }
-                    composable("routine_month") { RoutineMonth(navigationController) }
+                    composable("routine_day_screen") { RoutineDay(navigationController) }
+                    composable("routine_month_screen") { RoutineMonth(navigationController) }
                 }
             }
         }

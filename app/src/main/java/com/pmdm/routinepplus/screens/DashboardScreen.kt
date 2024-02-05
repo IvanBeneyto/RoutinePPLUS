@@ -5,12 +5,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
@@ -19,12 +18,15 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 
@@ -38,19 +40,85 @@ fun Dashboard(navController: NavController) {
     )
 }
 
-
 @Composable
 fun MyMenu(innerPadding: PaddingValues) {
-    Column (modifier = Modifier.fillMaxWidth()){
+    // Variable para almacenar la edad seleccionada
+    var selectedAge by remember { mutableStateOf(18) }
 
-        Icon(
-            modifier = Modifier.align(Alignment.CenterHorizontally).size(100.dp),
-            imageVector = Icons.Default.Person,
-            tint = Color(0xFFFFD699),
-            contentDescription = ""
-        )
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(innerPadding),
+        horizontalAlignment = Alignment.Start
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(100.dp)
+                    .align(Alignment.CenterVertically)
+                    .padding(8.dp),
+                imageVector = Icons.Default.Person,
+                tint = Color(0xFFFFD699),
+                contentDescription = ""
+            )
+
+            Column(
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .align(Alignment.Top)
+            ) {
+                Text(
+                    text = "NOMBRE: Iván Beneyto Collados",
+                    color = Color.Black,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                )
+
+                // Dropdown para la selección de edad
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "EDAD:",
+                    color = Color.Black,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                )
+                DropdownMenu(
+                    expanded = false,
+                    onDismissRequest = { /* No hacemos nada al cerrar */ },
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                ) {
+                    // Rango de edades del 18 al 40
+                    (18..40).forEach { age ->
+                        DropdownMenuItem(onClick = {
+                            selectedAge = age
+                        }) {
+                            Text(text = age.toString())
+                        }
+                    }
+                }
+                Text(
+                    text = "Edad seleccionada: $selectedAge",
+                    color = Color.Black,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                )
+            }
+        }
     }
 }
+
+
+
 
 @Composable
 fun MyBottomNavigation(navController: NavController) {
@@ -65,7 +133,6 @@ fun MyBottomNavigation(navController: NavController) {
         NavigationBarItem(
             selected = index == 0,
             onClick =
-
             {
                 index = 0
                 navController.navigate("exercises_screen")
@@ -99,7 +166,7 @@ fun MyBottomNavigation(navController: NavController) {
             selected = index == 2,
             onClick = {
                 index = 2
-                navController.navigate("routine_month")
+                navController.navigate("routine_month_screen")
             },
             icon = {
                 Icon(

@@ -72,10 +72,9 @@ fun myMenuRoutine(navController: NavController) {
         ) {
             items(4) { index ->
                 Button(
-                    onClick = { navController.navigate("routine_day") },
+                    onClick = { navController.navigate("routine_day_screen") },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Color(0xFFFFD699))
                         .height(70.dp),
                 ) {
                     Text(text = "SEMANA ${index + 1}")
