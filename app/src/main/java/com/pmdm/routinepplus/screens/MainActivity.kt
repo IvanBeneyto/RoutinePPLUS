@@ -15,6 +15,8 @@ import com.pmdm.routinepplus.ui.theme.RoutinePPLUSTheme
 class MainActivity : ComponentActivity() {
 
 
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +29,13 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navigationController,
-                    startDestination = "login_screen"
+                    startDestination = "exercises_screen"
                 ) {
                     composable("login_screen") { SingInScreen(navController = navigationController) }
                     composable("dashboard") { Dashboard(navigationController) }
                     composable("exercises_screen") { ExerciseScreen(navigationController) }
-                    composable("routine_day_screen") { RoutineDay(navigationController) }
-                    composable("routine_month_screen") { RoutineMonth(navigationController) }
+                    composable("routine_day") { RoutineDay(navigationController) }
+                    composable("routine_month") { RoutineMonth(navigationController) }
                 }
             }
         }

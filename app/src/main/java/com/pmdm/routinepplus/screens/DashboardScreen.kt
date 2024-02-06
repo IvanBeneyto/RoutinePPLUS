@@ -53,12 +53,13 @@ import com.pmdm.routinepplus.R
 
 @Composable
 fun Dashboard(navController: NavController) {
+    // Scaffold proporciona la estructura básica para la pantalla
     Scaffold(
         content = { innerPadding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xffe8e8e8))  // Add background color here
+                    .background(Color(0xffe8e8e8))  // Agregar color de fondo aquí
             ) {
                 MyMenu(innerPadding, navController)
             }
@@ -70,12 +71,22 @@ fun Dashboard(navController: NavController) {
 @Composable
 fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
 
-    val sharedPref = LocalContext.current.getSharedPreferences("progress_data", Context.MODE_PRIVATE)
+    val sharedPref =
+        LocalContext.current.getSharedPreferences("progress_data", Context.MODE_PRIVATE)
 
-    var progressCount: Int by remember { mutableStateOf(sharedPref.getInt("progress_count", 0)) } // Cargar progreso
+    // Variables de estado para el recuento de progreso y el porcentaje de progreso
+    var progressCount: Int by remember {
+        mutableStateOf(
+            sharedPref.getInt(
+                "progress_count",
+                0
+            )
+        )
+    }
+    // Cargar progreso
     var progress by remember { mutableStateOf(progressCount * 0.1f) } // Calcular porcentaje
 
-
+    // Función para guardar el recuento de progreso en las preferencias compartidas
     fun saveProgress() {
         val editor = sharedPref.edit()
         editor.putInt("progress_count", progressCount)
@@ -95,6 +106,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                 .padding(end = 6.dp),
             horizontalArrangement = Arrangement.End
         ) {
+            // Botón para cerrar sesión
             Button(
                 onClick = {
                     navController.navigate("login_screen")
@@ -105,7 +117,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Salir de la app")
+                Text(text = "Cerrar sesión")
             }
         }
         Image(
@@ -179,7 +191,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
         val context = LocalContext.current
 
 
-
+        // Configurar el progreso basado en el recuento de progreso
         when (progressCount) {
             0 -> progress = 0.0f
             1 -> progress = 0.1f
@@ -194,6 +206,8 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
             10 -> progress = 1.0f
         }
 
+
+        // Animar el tamaño del progreso
         val size by animateFloatAsState(
             targetValue = progress,
             tween(
@@ -203,10 +217,10 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
             )
         )
         Text(
-            text = "DIAS COMPLETADOS:", // Adjust text style as needed
+            text = "DIAS COMPLETADOS:",
             modifier = Modifier
                 .padding(top = 50.dp)
-                .padding(start = 110.dp) // Add spacing below the title
+                .padding(start = 110.dp)
         )
         Column(
             modifier = Modifier
@@ -214,7 +228,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                 .padding(top = 20.dp, start = 30.dp, end = 30.dp)
         ) {
 
-            // for the text above the progressBar
+
             Row(
                 modifier = Modifier
                     .widthIn(min = 30.dp)
@@ -222,20 +236,21 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                 horizontalArrangement = Arrangement.End
             ) {
             }
-            // Progress Bar
+
+            // Barra de progreso
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(17.dp)
             ) {
-                // for the background of the ProgressBar
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(9.dp))
                         .background(Color(0xFFFF09B3E4))
                 )
-                // for the progress of the ProgressBar
+
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(size)
@@ -246,13 +261,15 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                 )
             }
 
+            // Botones para aumentar y disminuir el progreso
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 30.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // decrease button
+
+                // Botón para disminuir el progreso
                 OutlinedButton(
                     onClick = {
                         if (progressCount > 0) {
@@ -270,7 +287,7 @@ fun MyMenu(innerPadding: PaddingValues, navController: NavController) {
                 ) {
                     Text(text = "Quitar día")
                 }
-                // increase Button
+                //Botón para aumentar el progreso
                 Button(
                     onClick = {
                         if (progressCount < 10) {
